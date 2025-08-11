@@ -72,19 +72,12 @@ export default function UploadPage() {
     setUploadProgress(0)
 
     try {
-      // Simulate upload progress
-      const uploadInterval = setInterval(() => {
-        setUploadProgress((prev) => {
-          if (prev >= 90) {
-            clearInterval(uploadInterval)
-          }
-          return prev + 10
-        })
-      }, 200)
-
+      setUploadProgress(0)
       // Upload file to Supabase
       const uploadedFileData = await uploadFileWithoutUser(file)
 
+
+      setUploadProgress(50)
       // Create file object for state and local storage
       const newFile = {
         id: uploadedFileData.path,
@@ -94,6 +87,8 @@ export default function UploadPage() {
         status: "completed",
         publicUrl: uploadedFileData.publicUrl
       }
+
+      setUploadProgress(80)
 
       // Store file information in session storage
       sessionStorage.setItem("fileUrl", uploadedFileData.publicUrl || "");

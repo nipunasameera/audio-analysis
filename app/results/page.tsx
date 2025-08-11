@@ -601,7 +601,7 @@ ${highlights.map((item) => `Keyphrase: ${item.text} - Count: ${item.count} - Ran
             <CardContent>
               <div className="space-y-4">
                 <div className="text-sm text-neutral-400">Transcript: {emotions?.text}</div>
-                {emotions?.overall_emotions.map((emotion, index) => (
+                {emotions?.overall_emotions?.map((emotion, index) => (
                   <div key={index}>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="text-white capitalize">{emotionToEmoji[emotion.label as keyof typeof emotionToEmoji]} {emotion.label}</span>
@@ -619,17 +619,17 @@ ${highlights.map((item) => `Keyphrase: ${item.text} - Count: ${item.count} - Ran
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {emotions?.timeline_emotions.map((emotion, index) => (
+                {emotions?.timeline_emotions?.map((emotion, index) => (
                   <div key={index} className="flex flex-col gap-2 p-3 mb-6 bg-neutral-800 rounded">
                     <div className="text-sm text-neutral-400 mb-2">Transcript: {emotion.text}</div>
                     {emotion.emotions.map((emotion, index) => (
-                      <>  
+                      <div key={index}>  
                       <div key={index} className="flex justify-between text-sm mb-2">
                         <span className="text-white capitalize">{emotionToEmoji[emotion.label as keyof typeof emotionToEmoji]} {emotion.label}</span>
                         <span className="text-white font-mono">{(emotion.score * 100).toFixed(2)}%</span>
                       </div>
                       <Progress value={emotion.score * 100} className="h-2" color="bg-green-500" /> 
-                      </>
+                      </div>
                     ))}
                   </div>
                 ))}
